@@ -3,3 +3,5 @@
 # .env file
 .env# General .gitignore template
 .DS_Store
+# General .gitignore template
+.DS_Store
