@@ -1,4 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # .env file
-.env
+.env# General .gitignore template
+.DS_Store

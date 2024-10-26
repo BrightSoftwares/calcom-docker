@@ -4,10 +4,10 @@ version: '3.8'
 volumes:
   database-data:
 
-networks:
-  stack:
-    name: stack
-    external: false
+#networks:
+#  stack:
+#    name: stack
+#    external: false
 
 services:
   database:
@@ -17,8 +17,8 @@ services:
     volumes:
       - database-data:/var/lib/postgresql/data/
     env_file: .env
-    networks:
-      - stack
+    #networks:
+    #  - stack
 
   calcom:
     image: calcom.docker.scarf.sh/calcom/cal.com
@@ -34,8 +34,8 @@ services:
         DATABASE_URL: ${DATABASE_URL}
       network: stack
     restart: always
-    networks:
-      - stack
+    #networks:
+    #  - stack
     ports:
       - 3000:3000
     env_file: .env
@@ -43,13 +43,15 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
     depends_on:
       - database
+    links:
+      - database
 
 # Optional use of Prisma Studio. In production, comment out or remove the section below to prevent unwanted access to your database.
   studio:
     image: calcom.docker.scarf.sh/calcom/cal.com
     restart: always
-    networks:
-      - stack
+    #networks:
+    #  - stack
     ports:
       - 5555:5555
     env_file: .env
